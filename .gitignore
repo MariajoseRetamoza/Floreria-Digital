@@ -1,0 +1,12 @@
+# Dependencias de Node.js
+node_modules/
+
+# Archivos de producción
+dist/
+
+# Variables de entorno (no subir)
+.env
+
+# Archivos de log y temporales
+*.log
+.DS_Store
