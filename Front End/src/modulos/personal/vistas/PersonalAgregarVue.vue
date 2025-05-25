@@ -7,32 +7,53 @@
       <div v-if="mensaje == 1" class="alert alert-success" role="alert">
         Datos agregados con exito
       </div>
+
       <div class="card-body">
-        <div class="mb-3">
-          <label class="form-label">Nombre</label>
-          <input type="text" class="form-control" v-model="personal.nombre" />
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Dirección</label>
-          <input
-            type="text"
-            class="form-control"
-            v-model="personal.direccion"
-          />
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Teléfono</label>
-          <input type="text" class="form-control" v-model="personal.telefono" />
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Estatus</label>
-          <input type="text" class="form-control" v-model="personal.estatus" />
-        </div>
-        <div class="text-end">
-          <button class="btn btn-success" @click="agregarPersonal(personal)">
-            Agregar
-          </button>
-        </div>
+        <Form :validation-schema="PersonalSchema" @submit="onTodoBien">
+          <div class="mb-3">
+            <label class="form-label">Nombre</label>
+            <Field
+              name="nombre"
+              type="text"
+              class="form-control"
+              v-model="personal.nombre"
+            />
+            <ErrorMessage name="nombre" class="errorValidacion" />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Dirección</label>
+            <Field
+              name="direccion"
+              type="text"
+              class="form-control"
+              v-model="personal.direccion"
+            />
+            <ErrorMessage name="direccion" class="errorValidacion" />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Teléfono</label>
+            <Field
+              name="telefono"
+              type="text"
+              class="form-control"
+              v-model="personal.telefono"
+            />
+            <ErrorMessage name="telefono" class="errorValidacion" />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Estatus</label>
+            <Field
+              name="estatus"
+              type="number"
+              class="form-control"
+              v-model.number="personal.estatus"
+            />
+            <ErrorMessage name="estatus" class="errorValidacion" />
+          </div>
+          <div class="text-end">
+            <button class="btn btn-success" type="submit">Agregar</button>
+          </div>
+        </Form>
       </div>
     </div>
   </div>
@@ -44,7 +65,7 @@ import type { PersonalAgregar } from "../interfaces/personal-interface";
 import { usePersonal } from "../controladores/usePersonal";
 const { agregarPersonal, mensaje } = usePersonal();
 import { PersonalSchema } from "../schemas/PersonalSchema";
-import {Field,Form,ErrorMessage} from "vee-validate";
+import { Field, Form, ErrorMessage } from "vee-validate";
 
 let personal = ref<PersonalAgregar>({
   nombre: "",
@@ -52,6 +73,15 @@ let personal = ref<PersonalAgregar>({
   telefono: "",
   estatus: 0,
 });
+
+const onTodoBien = async () => {
+  await agregarPersonal(personal.value);
+};
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.errorValidacion {
+  color: red;
+  font-weight: bold;
+}
+</style>
