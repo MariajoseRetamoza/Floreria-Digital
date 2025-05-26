@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
     <div class="container-fluid">
-      <a class="navbar-brand text-white fw-bold" href="#">Tienda</a>
+      <a class="navbar-brand text-white fw-bold" href="/bienvenida">Tienda</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -47,10 +47,38 @@
               Registro
             </Router-Link>
           </li>
+          <li class="nav-item" v-if="usuarioAutenticado">
+            <button @click.prevent="cerrarSesion" class="nav-link btn btn-link">
+              Salir
+            </button>
+          </li>
         </ul>
       </div>
     </div>
   </nav>
 </template>
 
-<script setup></script>
+<script setup lang="ts">
+import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+
+const usuarioAutenticado = ref(false);
+const auth = getAuth();
+const router = useRouter();
+
+onMounted(() => {
+  onAuthStateChanged(auth, (user) => {
+    usuarioAutenticado.value = !!user;
+  });
+});
+
+const cerrarSesion = async () => {
+  try {
+    await signOut(auth);
+    router.push("/bienvenida");
+  } catch (error) {
+    console.error("Error al cerrar sesión:", error);
+  }
+};
+</script>
