@@ -5,7 +5,6 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAHQtXCSyvhB93EShkK6jxKZXRc-ZY0ASk",
   authDomain: "floreria-digital.firebaseapp.com",
   projectId: "floreria-digital",
   storageBucket: "floreria-digital.firebasestorage.app",
