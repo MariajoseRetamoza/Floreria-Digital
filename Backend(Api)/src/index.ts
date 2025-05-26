@@ -1,33 +1,25 @@
 import express from "express";
 import cors from "cors";
 
-//creamos la aplicacion a traves del paquete express
-//y llamamos a su constructor
+// Creamos la aplicación con Express
 const app = express();
-//configurar rutas para el acceso apersonal
-import personalRutas from "./routes/personalRutas";
 
-//todo lo que se regresa al usuario es tipo JSON
+// Importamos las rutas
+import personalRutas from "./routes/personalRutas";
+import pedidosRutas from "./routes/pedidosRutas"; // ✅ Nueva ruta
+
+// Middleware para parsear JSON y permitir CORS
 app.use(express.json());
 app.use(cors());
-//Puerto para escuchar la peticion del frontend
+
+// Puerto del servidor
 const PUERTO = 3002;
 
-//activar la ruta base
+// Activamos las rutas
 app.use("/api/personal", personalRutas);
+app.use("/api/pedidos", pedidosRutas); // ✅ Nueva ruta activa
 
-// app.get("/hola", (_req, res) => {
-//   let fecha = new Date().toString();
-//   res.send(`Hola desde el navolato, la fecha es: ${fecha}`);
-// });
-
-//Encendemos el servidor y lo ponemos en escucha
+// Encendemos el servidor
 app.listen(PUERTO, () => {
-  console.log(`Servidor escuchando en el puerto ${PUERTO}`);
+  console.log(`✅ Servidor escuchando en el puerto ${PUERTO}`);
 });
-
-// console.log("🟡 Iniciando servidor...");
-// app.listen(PUERTO, () => {
-//   console.log(`✅ Servidor escuchando en el puerto ${PUERTO}`);
-// });
-// console.log("🟢 app.listen ejecutado");
