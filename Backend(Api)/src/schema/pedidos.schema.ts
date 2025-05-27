@@ -6,13 +6,13 @@ export const pedidosSchema = z
   .object({
     ID_Cliente: z.number().int().positive(),
     ID_Arreglo: z.number().int().positive(),
-    descripcion: z.string().max(200).optional(),
-    fecha_hora_pedido: z.string().optional(),
-    fecha_hora_entrega: z.string().optional(),
-    precio_sugerido: z.number().positive().optional(),
+    descripcion: z.string().min(1).max(200).optional(),
+    fecha_hora_pedido: z.string(),
+    fecha_hora_entrega: z.string(),
+    precio_sugerido: z.number().positive(),
     ID_personal: z.number().int().positive(),
-    entregado: z.number().int().min(1).max(2).optional(),
-    pagado: z.number().int().min(1).max(2).optional(),
+    entregado: z.number().int().min(1).max(2),
+    pagado: z.number().int().min(1).max(2),
   })
   .or(
     z.object({

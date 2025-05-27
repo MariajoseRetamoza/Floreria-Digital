@@ -5,12 +5,12 @@ export interface Pedido {
   ID_Cliente: number;
   ID_Arreglo: number;
   descripcion?: string;
-  fecha_hora_pedido?: string; // Formato ISO: "YYYY-MM-DDTHH:MM:SS"
+  fecha_hora_pedido?: string;
   fecha_hora_entrega?: string;
   precio_sugerido?: number;
   ID_personal: number;
-  entregado?: number; // 0 o 1
-  pagado?: number; // 0 o 1
+  entregado?: number;
+  pagado?: number;
 }
 
 export type PedidoNuevo = Omit<Pedido, "folio">;

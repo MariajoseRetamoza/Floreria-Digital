@@ -109,7 +109,7 @@ export const eliminaPersonal = async (id: number) => {
 };
 
 /////////////////////////////////////////
-// PRUEBA TEMPORAL DE CONEXIÓN (puedes borrar luego)
+// PRUEBA TEMPORAL DE CONEXIÓN
 const probarConexion = async () => {
   try {
     const [rows] = await conexion.query("SELECT NOW() AS hora_actual");
