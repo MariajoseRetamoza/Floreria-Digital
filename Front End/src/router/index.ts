@@ -1,6 +1,7 @@
 import PersonalVue from "@/modulos/personal/vistas/PersonalVue.vue";
 import PedidosVue from "@/modulos/pedidos/vistas/PedidosVue.vue";
 import PersonalAgregarVue from "@/modulos/personal/vistas/PersonalAgregarVue.vue";
+import PedidosAgregarVue from "@/modulos/pedidos/vistas/PedidosAgregarVue.vue";
 import { createRouter, createWebHistory } from "vue-router";
 import PersonalEditarVue from "@/modulos/personal/vistas/PersonalEditarVue.vue";
 import PersonalBorrarVue from "@/modulos/personal/vistas/PersonalBorrarVue.vue";
@@ -26,7 +27,7 @@ const router = createRouter({
         if (usuario) {
           next();
         } else {
-          next({ name: "validacion" });
+          next({ name: "validacion", query: { redirect: to.fullPath } });
         }
       },
     },
@@ -64,15 +65,20 @@ const router = createRouter({
       path: "/pedidos",
       name: "pedidos",
       component: PedidosVue,
-      // beforeEnter: (to, from, next) => {
-      //   const auth = getAuth();
-      //   const usuario = auth.currentUser; //hay un usuario?
-      //   if (usuario) {
-      //     next();
-      //   } else {
-      //     next({ name: "validacion" });
-      //   }
-      // },
+      beforeEnter: (to, from, next) => {
+        const auth = getAuth();
+        const usuario = auth.currentUser; // ¿hay un usuario?
+        if (usuario) {
+          next();
+        } else {
+          next({ name: "validacion", query: { redirect: to.fullPath } });
+        }
+      },
+    },
+    {
+      path: "/pedidos/agregar",
+      name: "pedidosagregar",
+      component: PedidosAgregarVue,
     },
   ],
 });

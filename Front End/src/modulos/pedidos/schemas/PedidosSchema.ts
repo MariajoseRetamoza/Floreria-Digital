@@ -1,7 +1,7 @@
 import { toTypedSchema } from "@vee-validate/zod";
 import zod from "zod";
 
-export const Pedidos = toTypedSchema(
+export const PedidosSchema = toTypedSchema(
   zod
     .object({
       folio: zod
@@ -36,13 +36,13 @@ export const Pedidos = toTypedSchema(
       entregado: zod
         .number({ message: "estatus de entrega requerido" })
         .int()
-        .min(0, { message: "mínimo 1" })
-        .max(1, { message: "máximo 2" }),
+        .min(1, { message: "mínimo 1" })
+        .max(2, { message: "máximo 2" }),
       pagado: zod
         .number({ message: "estatus de pago requerido" })
         .int()
-        .min(0, { message: "mínimo 1" })
-        .max(1, { message: "máximo 2" }),
+        .min(1, { message: "mínimo 1" })
+        .max(2, { message: "máximo 2" }),
     })
     .or(
       zod.object({
@@ -74,13 +74,13 @@ export const Pedidos = toTypedSchema(
         entregado: zod
           .number({ message: "estatus de entrega requerido" })
           .int()
-          .min(0, { message: "mínimo 1" })
-          .max(1, { message: "máximo 2" }),
+          .min(1, { message: "mínimo 1" })
+          .max(2, { message: "máximo 2" }),
         pagado: zod
           .number({ message: "estatus de pago requerido" })
           .int()
-          .min(0, { message: "mínimo 1" })
-          .max(1, { message: "máximo 2" }),
+          .min(1, { message: "mínimo 1" })
+          .max(2, { message: "máximo 2" }),
       })
     )
 );

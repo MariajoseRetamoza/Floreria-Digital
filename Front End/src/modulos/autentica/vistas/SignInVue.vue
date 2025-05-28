@@ -20,7 +20,7 @@
 
 <script setup>
 import { ref } from "vue";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import "../../../firebase/config.js";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
@@ -28,13 +28,15 @@ const correo = ref("");
 const clave = ref("");
 const error = ref(null);
 const router = useRouter();
+const route = useRoute();
 
 const entradaUsuario = async () => {
   error.value = null;
   try {
     const auth = getAuth();
     await signInWithEmailAndPassword(auth, correo.value, clave.value);
-    router.push({ name: "personal" });
+    const redirect = route.query.redirect || "/bienvenida";
+    router.push(redirect);
   } catch (err) {
     switch (err.code) {
       case "auth/user-not-found":

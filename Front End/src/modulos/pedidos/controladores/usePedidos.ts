@@ -11,21 +11,26 @@ export const usePedidos = () => {
     pedidos.value = respuesta.data;
     console.log(pedidos.value);
   };
-  //   const traePersonalPorId = async (id: number) => {
-  //     const respuesta = await personalApi.get<Personal[]>("/" + id);
-  //     personal.value = respuesta.data;
-  //     return respuesta.data;
-  //   };
-
-  //   const agregarPersonal = async (personal: PersonalAgregar) => {
-  //     const respuesta = await personalApi.post<{ affectedRows: number }>(
-  //       "/",
-  //       personal
-  //     );
-  //     if (respuesta.data.affectedRows > 0) {
-  //       mensaje.value = 1;
-  //     }
-  //   };
+  const traePedidosPorFolio = async (folio: number) => {
+    const respuesta = await pedidosApi.get<Pedidos[]>("/" + folio);
+    pedidos.value = respuesta.data;
+    return respuesta.data;
+  };
+  const agregarPedidos = async (pedido: PedidosAgregar) => {
+    try {
+      console.log("Datos a enviar:", pedido);
+      const respuesta = await pedidosApi.post<{ affectedRows: number }>(
+        "/",
+        pedido
+      );
+      console.log("Respuesta del backend:", respuesta.data);
+      if (respuesta.data.affectedRows > 0) {
+        mensaje.value = 1;
+      }
+    } catch (error) {
+      console.error("Error al agregar pedido:", error);
+    }
+  };
 
   //   const actualizarPersonal = async (personal: Personal) => {
   //     const respuesta = await personalApi.put("/", personal);
@@ -46,8 +51,8 @@ export const usePedidos = () => {
     pedidos,
     mensaje,
     traePedidos,
-    // // agregarPersonal,
-    // // traePersonalPorId,
+    agregarPedidos,
+    traePedidosPorFolio,
     // // actualizarPersonal,
     // // borrarPersonal,
   };

@@ -23,6 +23,8 @@ router.get("/:folio", async (req: Request, res: Response) => {
 // POST insertar pedido
 router.post("/", async (req: Request, res: Response) => {
   try {
+    console.log("Datos recibidos en backend:", req.body); // 👈 esto
+
     const {
       ID_Cliente,
       ID_Arreglo,
@@ -49,7 +51,8 @@ router.post("/", async (req: Request, res: Response) => {
 
     res.send(nuevo);
   } catch (e) {
-    res.status(400).send("No se puede agregar el pedido");
+    console.error("Error al agregar pedido:", e); // 👈 importante
+    res.status(400).send({ error: "No se puede agregar el pedido" });
   }
 });
 
