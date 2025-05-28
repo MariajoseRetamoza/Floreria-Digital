@@ -1,7 +1,9 @@
 <template>
-  <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+  <nav class="navbar navbar-expand-lg color-nav navbar-dark">
     <div class="container-fluid">
-      <a class="navbar-brand text-white fw-bold" href="/bienvenida">Tienda</a>
+      <a class="navbar-brand text-color fw-bold" href="/bienvenida"
+        >Floreria Digital</a
+      >
       <button
         class="navbar-toggler"
         type="button"
@@ -17,36 +19,30 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <Router-Link class="nav-link text-white fw-semibold" to="/clientes">
-              Clientes
-            </Router-Link>
-          </li>
-          <li class="nav-item">
             <Router-Link class="nav-link text-white fw-semibold" to="/personal">
               Personal
             </Router-Link>
           </li>
           <li class="nav-item">
-            <Router-Link
-              class="nav-link text-white fw-semibold"
-              to="/articulos"
-            >
-              Artículos
+            <Router-Link class="nav-link text-white fw-semibold" to="/clientes">
+              Clientes
             </Router-Link>
           </li>
-          <li class="nav-item">
-            <Router-Link class="nav-link text-white fw-semibold" to="/ventas">
-              Ventas
-            </Router-Link>
-          </li>
+
           <li class="nav-item">
             <Router-Link
               class="nav-link text-white fw-semibold"
-              to="/clientes/registro"
+              to="/arreglos-florales"
             >
-              Registro
+              Arreglos Florales
             </Router-Link>
           </li>
+          <li class="nav-item">
+            <Router-Link class="nav-link text-white fw-semibold" to="/pedidos">
+              Pedidos
+            </Router-Link>
+          </li>
+
           <li class="nav-item" v-if="usuarioAutenticado">
             <button @click.prevent="cerrarSesion" class="nav-link btn btn-link">
               Salir
@@ -82,3 +78,9 @@ const cerrarSesion = async () => {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.color-nav {
+  background-color: #6e9987;
+}
+</style>

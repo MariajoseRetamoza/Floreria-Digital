@@ -10,5 +10,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background: #e0e4ce;
+  color: #114d4d;
 }
 </style>

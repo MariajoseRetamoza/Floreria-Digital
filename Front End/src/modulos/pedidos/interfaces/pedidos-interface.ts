@@ -1,6 +1,4 @@
-// typesPedidos.ts
-
-export interface Pedido {
+export interface Pedidos {
   folio: number;
   ID_Cliente: number;
   ID_Arreglo: number;
@@ -13,4 +11,4 @@ export interface Pedido {
   pagado: number;
 }
 
-export type PedidoNuevo = Omit<Pedido, "folio">;
+export type PedidosAgregar = Omit<Pedidos, "folio">;

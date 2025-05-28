@@ -1,4 +1,5 @@
 import PersonalVue from "@/modulos/personal/vistas/PersonalVue.vue";
+import PedidosVue from "@/modulos/pedidos/vistas/PedidosVue.vue";
 import PersonalAgregarVue from "@/modulos/personal/vistas/PersonalAgregarVue.vue";
 import { createRouter, createWebHistory } from "vue-router";
 import PersonalEditarVue from "@/modulos/personal/vistas/PersonalEditarVue.vue";
@@ -58,6 +59,20 @@ const router = createRouter({
       path: "/validacion",
       name: "validacion",
       component: SignInVue,
+    },
+    {
+      path: "/pedidos",
+      name: "pedidos",
+      component: PedidosVue,
+      // beforeEnter: (to, from, next) => {
+      //   const auth = getAuth();
+      //   const usuario = auth.currentUser; //hay un usuario?
+      //   if (usuario) {
+      //     next();
+      //   } else {
+      //     next({ name: "validacion" });
+      //   }
+      // },
     },
   ],
 });
