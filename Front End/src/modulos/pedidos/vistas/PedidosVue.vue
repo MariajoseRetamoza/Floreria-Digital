@@ -30,7 +30,7 @@
     <tbody>
       <!-- Si no hay personal, muestra este solo renglón -->
       <tr v-if="pedidos.length == 0">
-        <td colspan="5" class="centrado">Sin pedidos registrado</td>
+        <td colspan="10" class="centrado">Sin pedidos registrado</td>
       </tr>
 
       <!-- Si hay personal, muestra la lista -->
