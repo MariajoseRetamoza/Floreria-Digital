@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg color-nav navbar-dark">
     <div class="container-fluid">
-      <a class="navbar-brand text-color fw-bold" href="/bienvenida"
+      <a class="navbar-brand titulo fw-bold" href="/bienvenida"
         >Floreria Digital</a
       >
       <button
@@ -19,26 +19,26 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <Router-Link class="nav-link text-white fw-semibold" to="/personal">
+            <Router-Link class="nav-link letra fw-semibold" to="/personal">
               Personal
             </Router-Link>
           </li>
           <li class="nav-item">
-            <Router-Link class="nav-link text-white fw-semibold" to="/clientes">
+            <Router-Link class="nav-link letra fw-semibold" to="/clientes">
               Clientes
             </Router-Link>
           </li>
 
           <li class="nav-item">
             <Router-Link
-              class="nav-link text-white fw-semibold"
+              class="nav-link letra fw-semibold"
               to="/arreglos-florales"
             >
               Arreglos Florales
             </Router-Link>
           </li>
           <li class="nav-item">
-            <Router-Link class="nav-link text-white fw-semibold" to="/pedidos">
+            <Router-Link class="nav-link letra fw-semibold" to="/pedidos">
               Pedidos
             </Router-Link>
           </li>
@@ -81,6 +81,12 @@ const cerrarSesion = async () => {
 
 <style lang="scss" scoped>
 .color-nav {
-  background-color: #6e9987;
+  background-color: #312736;
+}
+.navbar-nav .nav-link.letra {
+  color: #c4ffeb !important;
+}
+.titulo {
+  color: #d6abb1;
 }
 </style>
