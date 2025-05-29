@@ -69,14 +69,20 @@
             />
             <ErrorMessage name="precio_sugerido" class="errorValidacion" />
           </div>
+          <!-- Cambia el input por un select para ID Personal -->
           <div class="mb-3">
-            <label class="form-label">ID Personal</label>
+            <label class="form-label">Personal encargado</label>
             <Field
+              as="select"
               name="ID_personal"
-              type="number"
               class="form-control"
               v-model.number="pedidos.ID_personal"
-            />
+            >
+              <option value="" disabled>Selecciona personal</option>
+              <option v-for="p in personal" :key="p.id" :value="p.id">
+                {{ p.nombre }}
+              </option>
+            </Field>
             <ErrorMessage name="ID_personal" class="errorValidacion" />
           </div>
           <div class="mb-3">
@@ -111,12 +117,16 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import type { PedidosAgregar } from "../interfaces/pedidos-interface";
 import { usePedidos } from "../controladores/usePedidos";
 const { agregarPedidos, mensaje } = usePedidos();
 import { PedidosSchema } from "../schemas/PedidosSchema";
 import { Field, Form, ErrorMessage } from "vee-validate";
+
+// Importa el controlador de personal para la seleccion multiple
+import { usePersonal } from "../../personal/controladores/usePersonal";
+const { personal, traePersonal } = usePersonal();
 
 let pedidos = ref<PedidosAgregar>({
   ID_Cliente: 0,
@@ -128,6 +138,11 @@ let pedidos = ref<PedidosAgregar>({
   ID_personal: 0,
   entregado: 0,
   pagado: 0,
+});
+
+// Carga la lista de personal al montar el componente
+onMounted(() => {
+  traePersonal();
 });
 
 const onTodoBien = async () => {
