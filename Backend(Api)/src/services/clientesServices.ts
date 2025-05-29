@@ -3,7 +3,7 @@ import { clientesSchema } from "../schema/clientesSchema";
 import { Cliente, ClienteNuevo } from "../typesClientes";
 
 // Creamos el pool de conexiones
-const conexion =  mySql.createPool({
+const conexion = mySql.createPool({
   host: "localhost",
   user: "admin",
   password: "admin1234",
@@ -15,7 +15,7 @@ const conexion =  mySql.createPool({
 // Obtener todos los clientes
 export const obtieneClientes = async () => {
   try {
-    const [results] = await conexion.query('SELECT * FROM clientes');
+    const [results] = await conexion.query("SELECT * FROM clientes");
     return results;
   } catch (err) {
     return { error: "No se pueden obtener los clientes" };
@@ -25,16 +25,16 @@ export const obtieneClientes = async () => {
 // Obtener todos los clientes por id
 export const obtieneClientePorId = async (ID_cliente: number) => {
   try {
-    const [rows] = await conexion.query('SELECT * FROM clientes WHERE id = ? LIMIT 1', [ID_cliente]);
+    const [rows] = await conexion.query(
+      "SELECT * FROM clientes WHERE id_cliente = ? LIMIT 1",
+      [ID_cliente]
+    );
     return (rows as any[])[0] || null;
   } catch (error) {
-    console.error('Error en obtieneClientePorId:', error);
-    throw error; 
+    console.error("Error en obtieneClientePorId:", error);
+    throw error;
   }
 };
-
-
-
 
 // Alta de un nuevo cliente
 export const agregaCliente = async (nuevo: ClienteNuevo) => {
@@ -50,10 +50,7 @@ export const agregaCliente = async (nuevo: ClienteNuevo) => {
         Dirección,
         Telefono) 
         VALUES (?, ?, ?)`,
-        [ 
-        nuevo.Nombre_completo,
-        nuevo.Direccion,
-        nuevo.Telefono]
+      [nuevo.Nombre_completo, nuevo.Direccion, nuevo.Telefono]
     );
 
     return results;
@@ -62,11 +59,10 @@ export const agregaCliente = async (nuevo: ClienteNuevo) => {
   }
 };
 
-
 // Modificar cliente existente
 export const modificarCliente = async (modificado: Cliente) => {
   try {
-      const [results] = await conexion.query(
+    const [results] = await conexion.query(
       `UPDATE cliente SET
        Nombre_completo = ?, Direccion = ?, telefono = ?
        WHERE ID_Cliente = ?`,
@@ -74,7 +70,7 @@ export const modificarCliente = async (modificado: Cliente) => {
         modificado.Nombre_completo,
         modificado.Direccion,
         modificado.Telefono,
-        modificado.ID_Cliente
+        modificado.ID_Cliente,
       ]
     );
 

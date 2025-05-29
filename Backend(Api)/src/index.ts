@@ -6,7 +6,8 @@ const app = express();
 
 // Importamos las rutas
 import personalRutas from "./routes/personalRutas";
-import pedidosRutas from "./routes/pedidosRutas"; // ✅ Nueva ruta
+import pedidosRutas from "./routes/pedidosRutas";
+import clientesRutas from "./routes/clientesRutas"; // ✅ Nueva ruta activa
 
 // Middleware para parsear JSON y permitir CORS
 app.use(express.json());
@@ -17,7 +18,8 @@ const PUERTO = 3002;
 
 // Activamos las rutas
 app.use("/api/personal", personalRutas);
-app.use("/api/pedidos", pedidosRutas); // ✅ Nueva ruta activa
+app.use("/api/pedidos", pedidosRutas);
+app.use("/api/clientes", clientesRutas);
 
 // Encendemos el servidor
 app.listen(PUERTO, () => {
