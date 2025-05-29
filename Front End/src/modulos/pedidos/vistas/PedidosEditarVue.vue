@@ -95,15 +95,20 @@
             <ErrorMessage name="precio_sugerido" class="errorValidacion" />
           </div>
 
-          <!-- ID_personal -->
+          <!-- ID_personal como select -->
           <div class="mb-3">
-            <label class="form-label">ID Personal</label>
+            <label class="form-label">Personal encargado</label>
             <Field
+              as="select"
               name="ID_personal"
-              type="number"
               class="form-control"
               v-model.number="pedido.ID_personal"
-            />
+            >
+              <option value="" disabled>Selecciona personal</option>
+              <option v-for="p in personal" :key="p.id" :value="p.id">
+                {{ p.nombre }}
+              </option>
+            </Field>
             <ErrorMessage name="ID_personal" class="errorValidacion" />
           </div>
 
@@ -151,11 +156,16 @@ import { usePedidos } from "../controladores/usePedidos";
 import { PedidosSchema } from "../schemas/PedidosSchema";
 import { Field, Form, ErrorMessage } from "vee-validate";
 
+// Importa el controlador de personal
+import { usePersonal } from "../../personal/controladores/usePersonal";
+const { personal, traePersonal } = usePersonal();
+
 const { traePedidosPorFolio, mensaje, pedido, actualizarPedidos } =
   usePedidos();
 const route = useRoute();
 
 onMounted(async () => {
+  await traePersonal(); // Carga la lista de personal
   const folioPedido = Number(route.params.folio);
   await traePedidosPorFolio(folioPedido);
 });
