@@ -10,15 +10,43 @@
       </div>
 
       <div class="card-body">
-        <label class="form-label">Folio</label>
-        <input
-          type="text"
-          class="form-control mb-3"
-          v-model="pedido.folio"
-          disabled
-        />
-
         <Form :validation-schema="PedidosSchema" @submit="onSubmit">
+          <!-- folio -->
+          <div class="mb-3">
+            <label class="form-label">Folio</label>
+            <input
+              type="text"
+              class="form-control"
+              v-model="pedido.folio"
+              disabled
+            />
+          </div>
+
+          <!-- ID_Cliente -->
+          <div class="mb-3">
+            <label class="form-label">ID Cliente</label>
+            <Field
+              name="ID_Cliente"
+              type="number"
+              class="form-control"
+              v-model.number="pedido.ID_Cliente"
+            />
+            <ErrorMessage name="ID_Cliente" class="errorValidacion" />
+          </div>
+
+          <!-- ID_Arreglo -->
+          <div class="mb-3">
+            <label class="form-label">ID Arreglo</label>
+            <Field
+              name="ID_Arreglo"
+              type="number"
+              class="form-control"
+              v-model.number="pedido.ID_Arreglo"
+            />
+            <ErrorMessage name="ID_Arreglo" class="errorValidacion" />
+          </div>
+
+          <!-- descripcion -->
           <div class="mb-3">
             <label class="form-label">Descripción</label>
             <Field
@@ -30,6 +58,7 @@
             <ErrorMessage name="descripcion" class="errorValidacion" />
           </div>
 
+          <!-- fecha_hora_pedido -->
           <div class="mb-3">
             <label class="form-label">Fecha y Hora Pedido</label>
             <Field
@@ -41,6 +70,7 @@
             <ErrorMessage name="fecha_hora_pedido" class="errorValidacion" />
           </div>
 
+          <!-- fecha_hora_entrega -->
           <div class="mb-3">
             <label class="form-label">Fecha y Hora Entrega</label>
             <Field
@@ -52,6 +82,7 @@
             <ErrorMessage name="fecha_hora_entrega" class="errorValidacion" />
           </div>
 
+          <!-- precio_sugerido -->
           <div class="mb-3">
             <label class="form-label">Precio Sugerido</label>
             <Field
@@ -64,28 +95,7 @@
             <ErrorMessage name="precio_sugerido" class="errorValidacion" />
           </div>
 
-          <div class="mb-3">
-            <label class="form-label">ID Cliente</label>
-            <Field
-              name="ID_Cliente"
-              type="number"
-              class="form-control"
-              v-model.number="pedido.ID_Cliente"
-            />
-            <ErrorMessage name="ID_Cliente" class="errorValidacion" />
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label">ID Arreglo</label>
-            <Field
-              name="ID_Arreglo"
-              type="number"
-              class="form-control"
-              v-model.number="pedido.ID_Arreglo"
-            />
-            <ErrorMessage name="ID_Arreglo" class="errorValidacion" />
-          </div>
-
+          <!-- ID_personal -->
           <div class="mb-3">
             <label class="form-label">ID Personal</label>
             <Field
@@ -97,7 +107,7 @@
             <ErrorMessage name="ID_personal" class="errorValidacion" />
           </div>
 
-          <!-- CAMBIO: Entregado como campo numérico -->
+          <!-- entregado -->
           <div class="mb-3">
             <label class="form-label">Entregado</label>
             <Field
@@ -109,7 +119,7 @@
             <ErrorMessage name="entregado" class="errorValidacion" />
           </div>
 
-          <!-- CAMBIO: Pagado como campo numérico -->
+          <!-- pagado -->
           <div class="mb-3">
             <label class="form-label">Pagado</label>
             <Field

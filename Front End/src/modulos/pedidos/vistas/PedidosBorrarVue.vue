@@ -9,17 +9,35 @@
         <i class="fa fa-warning"></i>
       </div>
       <div class="card-body">
-        <label class="form-label">F</label>
-        <input
-          type="text"
-          class="form-control"
-          v-model="pedido.folio"
-          disabled
-        />
-      </div>
-      <div class="card-body">
         <div class="mb-3">
-          <label class="form-label">descripcion</label>
+          <label class="form-label">Folio</label>
+          <input
+            type="text"
+            class="form-control"
+            v-model="pedido.folio"
+            disabled
+          />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">ID Cliente</label>
+          <input
+            type="number"
+            class="form-control"
+            v-model="pedido.ID_Cliente"
+            disabled
+          />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">ID Arreglo</label>
+          <input
+            type="number"
+            class="form-control"
+            v-model="pedido.ID_Arreglo"
+            disabled
+          />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Descripción</label>
           <input
             type="text"
             class="form-control"
@@ -28,7 +46,7 @@
           />
         </div>
         <div class="mb-3">
-          <label class="form-label">Fecha y hora pedido</label>
+          <label class="form-label">Fecha y Hora Pedido</label>
           <input
             type="text"
             class="form-control"
@@ -37,7 +55,7 @@
           />
         </div>
         <div class="mb-3">
-          <label class="form-label">Fecha y hora entrega</label>
+          <label class="form-label">Fecha y Hora Entrega</label>
           <input
             type="text"
             class="form-control"
@@ -55,25 +73,7 @@
           />
         </div>
         <div class="mb-3">
-          <label class="form-label">ID cliente</label>
-          <input
-            type="number"
-            class="form-control"
-            v-model="pedido.ID_Cliente"
-            disabled
-          />
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Id Arreglo</label>
-          <input
-            type="number"
-            class="form-control"
-            v-model="pedido.ID_Arreglo"
-            disabled
-          />
-        </div>
-        <div class="mb-3">
-          <label class="form-label">ID personal</label>
+          <label class="form-label">ID Personal</label>
           <input
             type="number"
             class="form-control"
@@ -84,7 +84,7 @@
         <div class="mb-3">
           <label class="form-label">Entregado</label>
           <input
-            type="number"
+            type="text"
             class="form-control"
             v-model="pedido.entregado"
             disabled
@@ -93,7 +93,7 @@
         <div class="mb-3">
           <label class="form-label">Pagado</label>
           <input
-            type="number"
+            type="text"
             class="form-control"
             v-model="pedido.pagado"
             disabled
