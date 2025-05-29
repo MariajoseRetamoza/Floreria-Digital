@@ -4,6 +4,7 @@ import PersonalAgregarVue from "@/modulos/personal/vistas/PersonalAgregarVue.vue
 import PedidosAgregarVue from "@/modulos/pedidos/vistas/PedidosAgregarVue.vue";
 import { createRouter, createWebHistory } from "vue-router";
 import PersonalEditarVue from "@/modulos/personal/vistas/PersonalEditarVue.vue";
+import PedidosEditarVue from "@/modulos/pedidos/vistas/PedidosEditarVue.vue";
 import PersonalBorrarVue from "@/modulos/personal/vistas/PersonalBorrarVue.vue";
 import BienvenidaVue from "@/modulos/principal/vistas/BienvenidaVue.vue";
 import SignupVue from "@/modulos/autentica/vistas/SignupVue.vue";
@@ -79,6 +80,11 @@ const router = createRouter({
       path: "/pedidos/agregar",
       name: "pedidosagregar",
       component: PedidosAgregarVue,
+    },
+    {
+      path: "/pedidos/:folio/editar",
+      name: "pedidoseditar",
+      component: PedidosEditarVue,
     },
   ],
 });

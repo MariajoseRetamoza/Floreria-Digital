@@ -17,7 +17,7 @@ router.get("/:folio", async (req: Request, res: Response) => {
   const pedido = await pedidosServices.encuentraPedido(
     Number(req.params.folio)
   );
-  res.send(pedido);
+  res.send([pedido]); // <- Aquí lo envolvemos en un array como en Personal
 });
 
 // POST insertar pedido

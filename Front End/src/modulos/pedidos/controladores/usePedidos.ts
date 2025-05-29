@@ -4,6 +4,7 @@ import pedidosApi from "../api/pedidosAPI";
 
 export const usePedidos = () => {
   const pedidos = ref<Pedidos[]>([]);
+  const pedido = ref<Pedidos | null>(null); // para un solo pedido
   let mensaje = ref(0);
 
   const traePedidos = async () => {
@@ -11,11 +12,15 @@ export const usePedidos = () => {
     pedidos.value = respuesta.data;
     console.log(pedidos.value);
   };
+
   const traePedidosPorFolio = async (folio: number) => {
     const respuesta = await pedidosApi.get<Pedidos[]>("/" + folio);
-    pedidos.value = respuesta.data;
-    return respuesta.data;
+    console.log("Respuesta del backend por folio:", respuesta.data);
+    pedido.value = Array.isArray(respuesta.data) ? respuesta.data[0] : null;
+    console.log("Pedido seleccionado:", pedido.value);
+    return pedido.value;
   };
+
   const agregarPedidos = async (pedido: PedidosAgregar) => {
     try {
       console.log("Datos a enviar:", pedido);
@@ -32,28 +37,20 @@ export const usePedidos = () => {
     }
   };
 
-  //   const actualizarPersonal = async (personal: Personal) => {
-  //     const respuesta = await personalApi.put("/", personal);
-  //     if (respuesta.data.affectedRows >= 0) {
-  //       mensaje.value = 1;
-  //     }
-  //   };
+  const actualizarPedidos = async (pedido: Pedidos) => {
+    const respuesta = await pedidosApi.put("/", pedido);
+    if (respuesta.data.affectedRows >= 0) {
+      mensaje.value = 1;
+    }
+  };
 
-  //   const borrarPersonal = async (personal: Personal) => {
-  //     const respuesta = await personalApi.delete("/", {
-  //       data: { id: personal.id },
-  //     });
-  //     if (respuesta.data.fieldCount == 0) {
-  //       mensaje.value = 1;
-  //     }
-  //   };
   return {
     pedidos,
+    pedido,
     mensaje,
     traePedidos,
     agregarPedidos,
     traePedidosPorFolio,
-    // // actualizarPersonal,
-    // // borrarPersonal,
+    actualizarPedidos,
   };
 };

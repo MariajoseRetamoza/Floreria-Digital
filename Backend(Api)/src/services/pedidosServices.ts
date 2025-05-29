@@ -24,19 +24,26 @@ export const obtienePedidos = async () => {
   }
 };
 
-// Buscar pedido por folio
 export const encuentraPedido = async (folio: number) => {
   try {
+    console.log("Buscando pedido con folio:", folio);
     const validacion = pedidosSchema.safeParse({ folio });
     if (!validacion.success) {
+      console.log("Validación falló:", validacion.error);
       return { error: validacion.error };
     }
     const [results] = await conexion.query(
       "SELECT * FROM pedidos WHERE folio = ?",
       [folio]
     );
-    return results;
+    console.log("Resultado consulta:", results);
+    if (Array.isArray(results)) {
+      return results[0] ?? null;
+    } else {
+      return null;
+    }
   } catch (err) {
+    console.error("Error en encuentraPedido:", err);
     return { error: "No se puede encontrar el pedido" };
   }
 };

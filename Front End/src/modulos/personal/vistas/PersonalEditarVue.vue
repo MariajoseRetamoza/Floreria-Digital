@@ -1,5 +1,5 @@
 <template>
-  <div class="container mt-5" v-if="personal[0]">
+  <div class="container mt-5" v-if="personal">
     <div class="card shadow rounded-3">
       <div class="card-header bg-primary text-white">
         <h4 class="mb-0">Editar Personal</h4>
@@ -13,7 +13,7 @@
         <input
           type="text"
           class="form-control mb-3"
-          v-model="personal[0].id"
+          v-model="personal.id"
           disabled
         />
 
@@ -24,7 +24,7 @@
               name="nombre"
               type="text"
               class="form-control"
-              v-model="personal[0].nombre"
+              v-model="personal.nombre"
             />
             <ErrorMessage name="nombre" class="errorValidacion" />
           </div>
@@ -34,7 +34,7 @@
               name="direccion"
               type="text"
               class="form-control"
-              v-model="personal[0].direccion"
+              v-model="personal.direccion"
             />
             <ErrorMessage name="direccion" class="errorValidacion" />
           </div>
@@ -44,7 +44,7 @@
               name="telefono"
               type="text"
               class="form-control"
-              v-model="personal[0].telefono"
+              v-model="personal.telefono"
             />
             <ErrorMessage name="telefono" class="errorValidacion" />
           </div>
@@ -54,7 +54,7 @@
               name="estatus"
               type="number"
               class="form-control"
-              v-model.number="personal[0].estatus"
+              v-model.number="personal.estatus"
             />
             <ErrorMessage name="estatus" class="errorValidacion" />
           </div>
@@ -84,7 +84,9 @@ onMounted(async () => {
 });
 
 const onTodoBien = async () => {
-  await actualizarPersonal(personal.value[0]);
+  if (personal.value) {
+    await actualizarPersonal(personal.value);
+  }
 };
 </script>
 
