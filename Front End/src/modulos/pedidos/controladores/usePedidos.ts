@@ -44,6 +44,15 @@ export const usePedidos = () => {
     }
   };
 
+  const borrarPedidos = async (pedidos: Pedidos) => {
+    const respuesta = await pedidosApi.delete("/", {
+      data: { folio: pedidos.folio },
+    });
+    if (respuesta.data.fieldCount == 0) {
+      mensaje.value = 1;
+    }
+  };
+
   return {
     pedidos,
     pedido,
@@ -52,5 +61,6 @@ export const usePedidos = () => {
     agregarPedidos,
     traePedidosPorFolio,
     actualizarPedidos,
+    borrarPedidos,
   };
 };
