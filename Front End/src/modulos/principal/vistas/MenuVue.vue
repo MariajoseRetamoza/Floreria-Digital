@@ -81,12 +81,49 @@ const cerrarSesion = async () => {
 
 <style lang="scss" scoped>
 .color-nav {
-  background-color: #312736;
+  background-color: transparent !important;
+  box-shadow: none;
+  border: none;
 }
+
+.navbar-nav {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar-nav .nav-item {
+  margin: 0 18px;
+}
+
 .navbar-nav .nav-link.letra {
-  color: #c4ffeb !important;
+  color: #312736 !important;
+  background: none !important;
+  border-radius: 8px;
+  transition: background 0.2s, color 0.2s, border-bottom 0.2s;
+  padding: 8px 18px;
+  border-bottom: 2px solid transparent;
 }
-.titulo {
-  color: #d6abb1;
+
+.navbar-nav .nav-link.letra.router-link-active {
+  color: #c71c1c !important;
+  border-bottom: 2px solid #c71c1c;
+  background: #f0f4f8 !important;
+}
+
+.navbar-nav .nav-link.letra:hover:not(.router-link-active) {
+  background: #f0f4f8 !important;
+  color: #c71c1c !important;
+}
+
+.titulo,
+.titulo:visited,
+.titulo:focus,
+.titulo:hover,
+.titulo:active {
+  color: #c62828 !important;
+  background: transparent !important;
+  text-decoration: none !important;
 }
 </style>
