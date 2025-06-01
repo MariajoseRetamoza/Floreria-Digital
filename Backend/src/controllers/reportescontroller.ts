@@ -1,10 +1,24 @@
 import { Request, Response } from 'express';
 import { reportesService } from '../services/reportes.service';
+import { exportToExcel } from '../utils/excelExporter';
 
 // Reporte 1: Clientes
-export const reporteClientes = async (_req: Request, res: Response) => {
+export const reporteClientes = async (req: Request, res: Response) => {
   try {
     const clientes = await reportesService.getReporteClientes();
+
+    // Si ?export=excel, exportar a Excel
+    if (req.query.export === 'excel') {
+      const columns = [
+        { header: 'ID Cliente', key: 'ID_cliente' },
+        { header: 'Nombre Completo', key: 'nombre_completo' },
+        { header: 'Dirección', key: 'direccion' },
+        { header: 'Teléfono', key: 'telefono' }
+      ];
+      return await exportToExcel(res, clientes, columns, 'Reporte_Clientes.xlsx');
+    }
+
+    // Si no, devolver JSON
     res.json(clientes);
   } catch (error) {
     res.status(500).json({ error: 'Error al obtener reporte de clientes' });
