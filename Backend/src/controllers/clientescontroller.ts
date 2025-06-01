@@ -1,20 +1,38 @@
 import { Request, Response } from 'express';
+import { clientesService } from '../services/clientes.service';
 
-export const getAllClientes = (req: Request, res: Response) => {
-  res.send('Obtener listado completo de clientes.');
+export const getAllClientes = async (_req: Request, res: Response) => {
+  const clientes = await clientesService.getAll();
+  res.json(clientes);
 };
 
-export const createCliente = (req: Request, res: Response) => {
-  // Campos: Nombre completo, Dirección, Teléfono
-  res.send('Registrar nuevo cliente.');
+export const getClienteById = async (req: Request, res: Response) => {
+  const id = parseInt(req.params.id);
+  const cliente = await clientesService.getById(id);
+  if (cliente) {
+    res.json(cliente);
+  } else {
+    res.status(404).send('Cliente no encontrado');
+  }
 };
 
-export const updateCliente = (req: Request, res: Response) => {
-  const id = req.params.id;
-  res.send(`Editar información del cliente con ID ${id}.`);
+export const createCliente = async (req: Request, res: Response) => {
+  const nuevo = await clientesService.create(req.body);
+  res.status(201).json(nuevo);
 };
 
-export const deleteCliente = (req: Request, res: Response) => {
-  const id = req.params.id;
-  res.send(`Eliminar cliente con ID ${id}.`);
+export const updateCliente = async (req: Request, res: Response) => {
+  const id = parseInt(req.params.id);
+  const actualizado = await clientesService.update(id, req.body);
+  if (actualizado) {
+    res.json(actualizado);
+  } else {
+    res.status(404).send('Cliente no encontrado');
+  }
+};
+
+export const deleteCliente = async (req: Request, res: Response) => {
+  const id = parseInt(req.params.id);
+  const eliminado = await clientesService.delete(id);
+  res.status(204).send();
 };

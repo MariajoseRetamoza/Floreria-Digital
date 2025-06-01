@@ -1,10 +1,20 @@
 import { Router } from 'express';
+import {
+  getAllPedidos,
+  getPedidoByFolio,
+  createPedido,
+  updatePedido,
+  deletePedido
+} from '../controllers/pedidos.controller';
+import { validateSchema } from '../middlewares/validateSchema';
+import { pedidoSchema, pedidoUpdateSchema } from '../schemas/pedidos.schema';
 
 const router = Router();
 
-router.get('/', (req, res) => res.send('Listar pedidos'));
-router.post('/', (req, res) => res.send('Crear pedido'));
-router.put('/:id', (req, res) => res.send(`Actualizar pedido con ID ${req.params.id}`));
-router.delete('/:id', (req, res) => res.send(`Borrar pedido con ID ${req.params.id}`));
+router.get('/', getAllPedidos);
+router.get('/:folio', getPedidoByFolio);
+router.post('/', validateSchema(pedidoSchema), createPedido);
+router.put('/:folio', validateSchema(pedidoUpdateSchema), updatePedido);
+router.delete('/:folio', deletePedido);
 
 export default router;
