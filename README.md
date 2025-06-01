@@ -19,7 +19,7 @@ Backend desarrollado en **Node.js + Express + TypeScript + MySQL** para el siste
 ## Instalación
 1️- Clonar repositorio:
 ```
-git clone https://github.com/tu-repo/floreria-digital.git
+git clone https://github.com/MariajoseRetamoza/Floreria-Digital.git
 cd floreria-digital/Backend
 ```
 2️- Instalar dependencias:
