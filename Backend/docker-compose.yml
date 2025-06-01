@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  api_tienda:
+    build: ./Backend
+    ports:
+      - "3000:3000"
+    environment:
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_PASSWORD=secret
+      - DB_NAME=floreria_digital
+      - PORT=3000
+    depends_on:
+      - db
+    networks:
+      - tienda_net
+
+  db:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: floreria_digital
+    ports:
+      - "3306:3306"
+    networks:
+      - tienda_net
+
+networks:
+  tienda_net:
+    driver: bridge
