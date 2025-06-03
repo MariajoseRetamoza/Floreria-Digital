@@ -1,7 +1,20 @@
 version: '3.8'
+
 services:
+  mysql:
+    image: mysql:8
+    container_name: mysql_floreria
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: floreria_digital
+    volumes:
+      - mysql-data:/var/lib/mysql
+
   api_tienda:
-    build: ./Backend_api_tienda
+    build: ./api_tienda
+    container_name: api_floreria
     ports:
       - "3000:3000"
     environment:
@@ -14,21 +27,12 @@ services:
       - mysql
 
   cliente_tienda:
-    build: ./Frontend_cliente_tienda
+    build: ./cliente_tienda
+    container_name: cliente_floreria
     ports:
       - "8080:80"
     depends_on:
       - api_tienda
-
-  mysql:
-    image: mysql:8
-    environment:
-      MYSQL_ROOT_PASSWORD: secret
-      MYSQL_DATABASE: floreria_digital
-    ports:
-      - "3306:3306"
-    volumes:
-      - mysql-data:/var/lib/mysql
 
 volumes:
   mysql-data:
