@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 version: '3.8'
 services:
   api_tienda:
@@ -32,3 +33,39 @@ services:
 
 volumes:
   mysql-data:
+=======
+version: '3.8'
+services:
+  api_tienda:
+    build: ./Backend\ (api_tienda)
+    ports:
+      - "3000:3000"
+    environment:
+      - DB_HOST=mysql
+      - DB_USER=root
+      - DB_PASSWORD=secret
+      - DB_NAME=floreria_digital
+      - PORT=3000
+    depends_on:
+      - mysql
+
+  cliente_tienda:
+    build: ./Frontend\ (cliente_tienda)
+    ports:
+      - "8080:80"
+    depends_on:
+      - api_tienda
+
+  mysql:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: floreria_digital
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  mysql-data:
+>>>>>>> 3946fdb (Agregar reportes y docker-compose global)
