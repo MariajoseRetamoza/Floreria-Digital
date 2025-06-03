@@ -1,7 +1,7 @@
 <template>
-  <h1 style="color: red;">🎯 ¡App.vue está funcionando!</h1>
+  <Navbar />
+  <router-view />
 </template>
-
 
 <script setup lang="ts">
 import Navbar from './components/Navbar.vue';
