@@ -14,7 +14,7 @@ services:
       - mysql
 
   cliente_tienda:
-    build: ./Frontend_cliente_tienda
+    build: ./cliente_tienda
     ports:
       - "8080:80"
     depends_on:
