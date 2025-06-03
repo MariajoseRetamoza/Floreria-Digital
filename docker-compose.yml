@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   api_tienda:
-    build: ./Backend\ (api_tienda)
+    build: ./Backend_api_tienda
     ports:
       - "3000:3000"
     environment:
@@ -14,7 +14,7 @@ services:
       - mysql
 
   cliente_tienda:
-    build: ./Frontend\ (cliente_tienda)
+    build: ./Frontend_cliente_tienda
     ports:
       - "8080:80"
     depends_on:
