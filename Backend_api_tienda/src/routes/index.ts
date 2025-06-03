@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import personalRoutes from './personal.routes';
-import clientesRoutes from './clientes.routes';
-import pedidosRoutes from './pedidos.routes';
-import arreglosRoutes from './arreglos.routes';
+import personalRoutes from './personalroutes';
+import clientesRoutes from './clientesroutes';
+import pedidosRoutes from './pedidosroutes';
+import arreglosRoutes from './arreglosroutes';
 
 const router = Router();
 

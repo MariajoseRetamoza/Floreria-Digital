@@ -7,7 +7,7 @@ import {
   reportePedidosPagados,
   reportePedidosPorPersonal,
   reporteArreglos
-} from '../controllers/reportes.controller';
+} from '../controllers/reportescontroller';
 
 const router = Router();
 

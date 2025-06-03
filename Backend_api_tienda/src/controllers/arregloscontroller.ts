@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { arreglosService } from '../services/arreglos.service';
+import { arreglosService } from '../services/arreglosservice';
 
 export const getAllArreglos = async (_req: Request, res: Response) => {
   const arreglos = await arreglosService.getAll();

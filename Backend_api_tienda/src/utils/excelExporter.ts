@@ -1,30 +1,22 @@
 import ExcelJS from 'exceljs';
-import { Response } from 'express';
 
-export const exportToExcel = async (res: Response, data: any[], columns: { header: string, key: string }[], filename: string) => {
+export const exportToExcel = (data: any[], filename: string) => {
   const workbook = new ExcelJS.Workbook();
-  const worksheet = workbook.addWorksheet('Reporte');
+  const worksheet = workbook.addWorksheet('Data');
 
-  // Definir columnas
-  worksheet.columns = columns;
+  worksheet.columns = Object.keys(data[0]).map(key => ({
+    header: key,
+    key: key,
+    width: 20
+  }));
 
-  // Añadir datos
-  data.forEach(item => {
-    worksheet.addRow(item);
-  });
-
-  // Formato automático (ancho)
-  worksheet.columns.forEach(column => {
-    let maxLength = 10;
-    column.eachCell({ includeEmpty: true }, cell => {
-      maxLength = Math.max(maxLength, (cell.value?.toString()?.length ?? 0));
+  data.forEach((row, rowIndex) => {
+    worksheet.addRow(row);
+    worksheet.columns?.forEach((column: Partial<ExcelJS.Column>, colIndex) => {
+      const cell = worksheet.getRow(rowIndex + 1).getCell(colIndex + 1);
+      cell.alignment = { vertical: 'middle', horizontal: 'center' };
     });
-    column.width = maxLength + 2;
   });
 
-  // Enviar archivo como descarga
-  res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-  res.setHeader('Content-Disposition', `attachment; filename=${filename}`);
-  await workbook.xlsx.write(res);
-  res.end();
+  return workbook.xlsx.writeFile(filename);
 };

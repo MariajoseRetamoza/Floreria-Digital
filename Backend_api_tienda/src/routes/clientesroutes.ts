@@ -5,9 +5,9 @@ import {
   createCliente,
   updateCliente,
   deleteCliente
-} from '../controllers/clientes.controller';
+} from '../controllers/clientescontroller';
 import { validateSchema } from '../middlewares/validateSchema';
-import { clienteSchema, clienteUpdateSchema } from '../schemas/clientes.schema';
+import { clienteSchema, clienteUpdateSchema } from '../schemas/clientesschema';
 
 const router = Router();
 

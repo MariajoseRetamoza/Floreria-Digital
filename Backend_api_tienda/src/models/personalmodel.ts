@@ -1,4 +1,5 @@
-export interface Personal {
+  import { Cliente } from './clientemodel';
+  export interface Personal {
   id: number; // Autoincrementable
   nombreCompleto: string;
   direccion: string;

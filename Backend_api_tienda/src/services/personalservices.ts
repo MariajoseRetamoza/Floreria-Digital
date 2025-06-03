@@ -1,5 +1,5 @@
 import { db } from '../config/db';
-import { Personal } from '../models/personal.model';
+import { Personal } from '../models/personalmodel';
 
 export const personalService = {
   getAll: async (): Promise<Personal[]> => {

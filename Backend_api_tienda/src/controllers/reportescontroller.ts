@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { reportesService } from '../services/reportes.service';
+import { reportesService } from '../services/reportesservice';
 import { exportToExcel } from '../utils/excelExporter';
 
 // Reporte 1: Clientes

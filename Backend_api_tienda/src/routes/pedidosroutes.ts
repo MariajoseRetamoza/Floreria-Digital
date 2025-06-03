@@ -5,9 +5,9 @@ import {
   createPedido,
   updatePedido,
   deletePedido
-} from '../controllers/pedidos.controller';
+} from '../controllers/pedidoscontroller';
 import { validateSchema } from '../middlewares/validateSchema';
-import { pedidoSchema, pedidoUpdateSchema } from '../schemas/pedidos.schema';
+import { pedidoSchema, pedidoUpdateSchema } from '../schemas/pedidosschema';
 
 const router = Router();
 

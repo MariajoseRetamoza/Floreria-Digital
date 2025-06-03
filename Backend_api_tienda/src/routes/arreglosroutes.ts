@@ -5,9 +5,9 @@ import {
   createArreglo,
   updateArreglo,
   deleteArreglo
-} from '../controllers/arreglos.controller';
+} from '../controllers/arregloscontroller';
 import { validateSchema } from '../middlewares/validateSchema';
-import { arregloSchema, arregloUpdateSchema } from '../schemas/arreglos.schema';
+import { arregloSchema, arregloUpdateSchema } from '../schemas/arreglosschema';
 
 const router = Router();
 

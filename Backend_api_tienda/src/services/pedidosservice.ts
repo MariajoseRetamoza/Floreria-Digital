@@ -1,5 +1,5 @@
 import { db } from '../config/db';
-import { Pedido } from '../models/pedido.model';
+import { Pedido } from '../models/pedidomodel';
 
 export const pedidosService = {
   getAll: async (): Promise<Pedido[]> => {

@@ -5,9 +5,9 @@ import {
   createPersonal,
   updatePersonal,
   deletePersonal
-} from '../controllers/personal.controller';
+} from '../controllers/personalcontroller';
 import { validateSchema } from '../middlewares/validateSchema';
-import { personalSchema, personalUpdateSchema } from '../schemas/personal.schema';
+import { personalSchema, personalUpdateSchema } from '../schemas/personalschema';
 
 const router = Router();
 
