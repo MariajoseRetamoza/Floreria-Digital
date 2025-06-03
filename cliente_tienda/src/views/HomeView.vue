@@ -1,120 +1,165 @@
 <template>
-  <div class="container">
-    <h2>Gestión de Arreglos Florales</h2>
+  <div class="home">
+    <section class="hero">
+      <div class="hero-text">
+        <h1>Lovely Flowers Shop</h1>
+        <p>Encuentra el ramo perfecto para cada ocasión.</p>
+        <button @click="irAProductos">Ver productos →</button>
+      </div>
+      <div class="hero-image">
+        <img src="/img/hero-flor.jpg" alt="Flor principal" />
+      </div>
+    </section>
 
-    <form @submit.prevent="guardarArreglo">
-      <input v-model="form.descripcion" placeholder="Descripción" />
-      <select v-model="form.tipo_arreglo">
-        <option value="1">Ramo</option>
-        <option value="2">Centro de mesa</option>
-        <option value="3">Corona</option>
-        <option value="4">Mixto</option>
-      </select>
-      <select v-model="form.estatus">
-        <option value="1">Vigente</option>
-        <option value="2">No vigente</option>
-      </select>
-      <button>{{ editando ? 'Actualizar' : 'Agregar' }}</button>
-    </form>
+    <section class="our-values">
+      <div class="text">
+        <h2>Ramos personalizados</h2>
+        <p>Floristas expertos listos para ayudarte a elegir el ramo ideal.</p>
+        <h2>Precios accesibles</h2>
+        <p>Gran calidad sin afectar tu bolsillo.</p>
+      </div>
+      <div class="images">
+        <img src="/img/bouquet1.jpg" alt="Bouquet 1" />
+        <img src="/img/bouquet2.jpg" alt="Bouquet 2" />
+      </div>
+    </section>
 
-    <ul>
-      <li v-for="a in arreglos" :key="a.ID_arreglo">
-        {{ a.descripcion }} - {{ tipoTexto(a.tipo_arreglo) }} ({{ estatusTexto(a.estatus) }})
-        <button @click="editar(a)">Editar</button>
-        <button @click="eliminar(a.ID_arreglo)">Eliminar</button>
-      </li>
-    </ul>
+    <section class="trending">
+      <h2>Ramos populares</h2>
+      <div class="grid">
+        <div v-for="i in 6" :key="i" class="bouquet">
+          <img :src="`/img/bouquet${(i % 3) + 1}.jpg`" alt="Bouquet" />
+          <span>{{ (25 + i * 2).toFixed(2) }} $</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="why-us">
+      <h2>¿Por qué elegirnos?</h2>
+      <div class="reasons">
+        <div class="reason">
+          <i class="icon">🏪</i>
+          <p>15 sucursales en la ciudad</p>
+        </div>
+        <div class="reason">
+          <i class="icon">🚚</i>
+          <p>Envíos rápidos en menos de 1 hora</p>
+        </div>
+        <div class="reason">
+          <i class="icon">📷</i>
+          <p>Vista previa del ramo antes de entregar</p>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { z } from 'zod';
-import api from '../utils/api';
-import { useToast } from 'vue-toastification';
-
-const toast = useToast();
-
-const ArregloSchema = z.object({
-  descripcion: z.string().min(3),
-  tipo_arreglo: z.string(),
-  estatus: z.string()
-});
-
-const arreglos = ref<any[]>([]);
-const form = ref({ descripcion: '', tipo_arreglo: '1', estatus: '1' });
-const editando = ref(false);
-const editId = ref<number | null>(null);
-
-const cargar = async () => {
-  const { data } = await api.get('/arreglos');
-  arreglos.value = data;
-};
-
-const guardarArreglo = async () => {
-  try {
-    ArregloSchema.parse(form.value);
-    if (editando.value) {
-      await api.put(`/arreglos/${editId.value}`, form.value);
-      toast.success('Arreglo actualizado');
-    } else {
-      await api.post('/arreglos', form.value);
-      toast.success('Arreglo agregado');
-    }
-    form.value = { descripcion: '', tipo_arreglo: '1', estatus: '1' };
-    editando.value = false;
-    editId.value = null;
-    cargar();
-  } catch (err: any) {
-    toast.error(err.errors?.[0]?.message || 'Error en formulario');
-  }
-};
-
-const editar = (a: any) => {
-  form.value = { ...a };
-  editId.value = a.ID_arreglo;
-  editando.value = true;
-};
-
-const eliminar = async (id: number) => {
-  await api.delete(`/arreglos/${id}`);
-  toast.success('Arreglo eliminado');
-  cargar();
-};
-
-const tipoTexto = (val: string | number) => {
-  const tipos = { 1: 'Ramo', 2: 'Centro de mesa', 3: 'Corona', 4: 'Mixto' };
-  return tipos[val as keyof typeof tipos] || 'Desconocido';
-};
-
-const estatusTexto = (val: string | number) => (val == '1' ? 'Vigente' : 'No vigente');
-
-onMounted(cargar);
+<script setup>
+const irAProductos = () => {
+  // Aquí puedes redirigir a la vista de productos si la tienes
+  // Por ejemplo: router.push("/arreglos")
+}
 </script>
 
 <style scoped>
-.container {
-  max-width: 600px;
-  margin: auto;
-  background: #fff;
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+.home {
+  font-family: 'Segoe UI', sans-serif;
+  padding: 1rem;
+  color: #333;
 }
-form input, form select {
-  margin-bottom: 10px;
-  padding: 8px;
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  margin-bottom: 3rem;
+  gap: 2rem;
+}
+
+.hero-image img {
   width: 100%;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  border-radius: 1rem;
 }
-button {
-  margin-right: 10px;
-  padding: 8px 16px;
+
+.hero-text h1 {
+  font-size: 3rem;
+  color: #e91e63;
+}
+
+.hero-text p {
+  font-size: 1.2rem;
+}
+
+.hero-text button {
+  margin-top: 1rem;
+  padding: 0.7rem 1.5rem;
   border: none;
-  background-color: #42b983;
+  background-color: #e91e63;
   color: white;
-  border-radius: 6px;
   cursor: pointer;
+  border-radius: 0.5rem;
+}
+
+.our-values {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  background: #fff0f5;
+  padding: 2rem;
+  border-radius: 1rem;
+  margin-bottom: 3rem;
+}
+
+.our-values .images img {
+  width: 100%;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.trending .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.bouquet {
+  text-align: center;
+}
+
+.bouquet img {
+  width: 100%;
+  border-radius: 0.5rem;
+}
+
+.bouquet span {
+  display: block;
+  margin-top: 0.5rem;
+  color: #e91e63;
+  font-weight: bold;
+}
+
+.why-us {
+  background: #fff0f5;
+  padding: 2rem;
+  margin-top: 3rem;
+  border-radius: 1rem;
+}
+
+.why-us .reasons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: space-around;
+  margin-top: 1rem;
+}
+
+.reason {
+  text-align: center;
+  max-width: 200px;
+}
+
+.icon {
+  font-size: 2rem;
 }
 </style>
