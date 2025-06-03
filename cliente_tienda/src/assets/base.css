@@ -1,0 +1,72 @@
+/* assets/base.css */
+
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Tipografía global */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fffafa;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Botones estándar */
+button {
+  background-color: #e91e63;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+button:hover {
+  background-color: #d81b60;
+}
+
+/* Contenedor adaptable */
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 1rem;
+}
+
+/* Títulos */
+h1, h2, h3 {
+  color: #e91e63;
+  margin-bottom: 0.8rem;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+  border-radius: 0.5rem;
+}
+
+/* Cards */
+.card {
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  padding: 1rem;
+}
+
+/* Grid base */
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.grid-2 {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.grid-3 {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
