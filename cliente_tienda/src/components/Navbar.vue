@@ -7,6 +7,16 @@
       <RouterLink to="/personal">Personal</RouterLink>
       <RouterLink to="/arreglos">Arreglos</RouterLink>
       <RouterLink to="/pedidos">Pedidos</RouterLink>
+
+      <!-- Reportes -->
+      <RouterLink to="/reporte-clientes">Rpt. Clientes</RouterLink>
+      <RouterLink to="/reporte-personal">Rpt. Personal</RouterLink>
+      <RouterLink to="/reporte-pedidos-fecha">Rpt. Ped. Fecha</RouterLink>
+      <RouterLink to="/reporte-pedidos-entregados">Rpt. Entregados</RouterLink>
+      <RouterLink to="/reporte-pedidos-pagados">Rpt. Pagados</RouterLink>
+      <RouterLink to="/reporte-pedidos-por-personal">Rpt. x Personal</RouterLink>
+      <RouterLink to="/reporte-arreglos">Rpt. Arreglos</RouterLink>
+
       <a href="#" @click="logout">Salir</a>
     </div>
   </div>
@@ -27,13 +37,15 @@ const logout = async () => {
 <style scoped>
 .navbar {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   padding: 1rem 2rem;
   background-color: #fdecef;
   align-items: center;
+  gap: 1rem;
 }
 .navbar a {
-  margin-left: 20px;
+  margin-left: 10px;
   text-decoration: none;
   color: #333;
   font-weight: bold;
