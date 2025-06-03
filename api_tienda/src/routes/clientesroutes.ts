@@ -7,7 +7,9 @@ import {
   deleteCliente
 } from '../controllers/clientescontroller';
 import { validateSchema } from '../middlewares/validateSchema';
-import { clienteSchema, clienteUpdateSchema } from '../schemas/clientesschema';
+import { clienteSchema } from '../schemas/clienteschema';
+
+router.post('/clientes', validateSchema(clienteschema), crearCliente);
 
 const router = Router();
 

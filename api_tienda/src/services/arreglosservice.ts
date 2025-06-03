@@ -1,4 +1,4 @@
-import pool from '../database';
+import pool from '../db.ts';
 import { ResultSetHeader } from 'mysql2';
 
 export const obtieneArreglos = async () => {
@@ -8,7 +8,7 @@ export const obtieneArreglos = async () => {
 
 export const encuentraArreglo = async (id: number) => {
   const [rows] = await pool.query('SELECT * FROM Arreglos_Florales WHERE ID_arreglo = ?', [id]);
-  return rows[0];
+  return (rows as any[])[0];
 };
 
 export const agregaArreglo = async (arreglo: any) => {
@@ -16,11 +16,11 @@ export const agregaArreglo = async (arreglo: any) => {
     'INSERT INTO Arreglos_Florales (descripcion, tipo_arreglo, estatus) VALUES (?, ?, ?)',
     [arreglo.descripcion, arreglo.tipo_arreglo, arreglo.estatus]
   );
-  return { id: result.insertId, ...arreglo };
+  return { id: (result as ResultSetHeader).insertId, ...arreglo };
 };
 
 export const modificarArreglo = async (arreglo: any) => {
-  const [result] = await pool.query(
+  await pool.query(
     'UPDATE Arreglos_Florales SET descripcion = ?, tipo_arreglo = ?, estatus = ? WHERE ID_arreglo = ?',
     [arreglo.descripcion, arreglo.tipo_arreglo, arreglo.estatus, arreglo.ID_arreglo]
   );

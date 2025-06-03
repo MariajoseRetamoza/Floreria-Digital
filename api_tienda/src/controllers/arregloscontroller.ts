@@ -1,5 +1,11 @@
 import { Request, Response } from 'express';
-import { arreglosService } from '../services/arreglosservice';
+import {
+  obtieneArreglos,
+  encuentraArreglo,
+  agregaArreglo,
+  modificarArreglo,
+  eliminaArreglo
+} from '../services/arreglosservice';
 
 export const getAllArreglos = async (_req: Request, res: Response) => {
   const arreglos = await arreglosService.getAll();

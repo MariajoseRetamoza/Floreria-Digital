@@ -1,5 +1,5 @@
 import { db } from '../config/db';
-import { Cliente } from '../models/cliente.model';
+import { Cliente } from '../models/clientemodel';
 
 export const clientesService = {
   getAll: async (): Promise<Cliente[]> => {
@@ -26,7 +26,7 @@ export const clientesService = {
     const fields = Object.keys(data).map(field => `${field} = ?`).join(', ');
     const values = Object.values(data);
     await db.query(`UPDATE clientes SET ${fields} WHERE ID_cliente = ?`, [...values, id]);
-    return clientesService.getById(id);
+    return clientesservice.getById(id);
   },
 
   delete: async (id: number): Promise<boolean> => {
